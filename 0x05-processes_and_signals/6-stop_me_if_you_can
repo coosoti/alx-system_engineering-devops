@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-#  a Bash script that stops 4-to_infinity_and_beyond process using killall or kill
+#  a Bash script that stops 4-to_infinity_and_beyond process without using killall or kill
 
 pkill -f 4-to_infinity_and_beyond
