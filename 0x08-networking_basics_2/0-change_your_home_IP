@@ -4,8 +4,5 @@
 
 file=~/hosts.new
 cp /etc/hosts $file
-
-sed -i -e "$a\\n127.0.0.2\t127.0.0.1" $file
-sed -i -e "$a\\n8.8.8.8\tfacebook.com\n" $file
-
+sed -i s/127.*$/127.0.0.2\\tlocalhost\\n8.8.8.8\\tfacebook.com/g $file
 cp -f $file /etc/hosts
