@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Install nginx and and make it return a page with a string 'Holberton School'
+# Make sure that the '/redirect_me' url is a permanent redirect
+
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -y install nginx
+sudo service nginx start
+newlines="\\\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;"
+sudo sed -i "53i $newlines" /etc/nginx/sites-available/default
+sudo service nginx restart
+sudo service nginx reload
