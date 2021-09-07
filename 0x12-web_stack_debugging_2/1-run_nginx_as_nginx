@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# nginx must be running as nginx user
+# nginx must be listening on all active IPs on port 8080
+
+# /var/log/nginx/error.log shows port 8080 is being used
+# netstat -lpn shows apache2 is using :::8080
+pkill -f apache2
+
+# stop nginx if it is running
+pkill nginx
+
+# change permissions of Nginx config files
+chown nginx:nginx /etc/nginx/nginx.conf
+chmod 700 /etc/nginx/nginx.conf
+
+# instruct nginx to listen on port 8080
+sed -i 's/80 default_server/8080 default_server/' /etc/nginx/sites-available/default
+
+# restart nginx
+sudo -u nginx service nginx start
