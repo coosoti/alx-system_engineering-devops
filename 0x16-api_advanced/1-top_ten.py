@@ -15,7 +15,7 @@ def top_ten(subreddit):
     if subreddit is None or type(subreddit) != str:
         print(None)
     req = requests.get(url, headers=user_agent, allow_redirects=False,
-                            params={'limit': 10}).json()
+                       params={'limit': 10}).json()
     data = req.get('data')
     if data:
         children = data.get('children')
