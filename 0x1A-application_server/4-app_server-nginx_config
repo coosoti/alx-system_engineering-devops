@@ -1,0 +1,34 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server ipv6only=on;
+    server_name 35.243.198.3;
+
+
+    root /var/www/html;
+    location /hbnb_static {
+        alias /data/web_static/current/;
+    }
+
+    error_page 404 /404.html;
+    location = /404.html {
+         root /var/www/html;
+         internal;
+    }
+    index index.html index.htm index.nginx-debian.html;
+    add_header X-Served-By 179-web-01;
+
+    server_name localhost;
+    location = /airbnb-onepage/ {
+        include proxy_params;
+        proxy_pass http://127.0.0.1:5000/airbnb-onepage/;
+    }
+
+    location ~ /airbnb-dynamic/number_odd_or_even/(\d+)$ {
+        proxy_pass http://127.0.0.1:5001/number_odd_or_even/$1;
+    }
+
+     location /api/ {
+        include proxy_params;
+        proxy_pass http://127.0.0.1:5002;
+    }
+}
